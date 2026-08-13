@@ -332,7 +332,9 @@ async function updateStandings() {
 
     const visible = table.slice(start, start + 7);
 
-    $("standingsList").innerHTML = visible.map(row => `
+    const standingsEl = $("#standingsList");
+    if (!standingsEl) return;
+    standingsEl.innerHTML = visible.map(row => `
       <div class="standingRow ${
         String(row?.team?.id) === String(teamId)
           ? "currentTeam"
