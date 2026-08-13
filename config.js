@@ -4,7 +4,7 @@
   La clé reste sur ton PC et n'est jamais envoyée à BGency.
 */
 const CONFIG = {
-  API_KEY: "COLLE_TA_CLE_API_ICI",
+  API_KEY: "c8baca066a99e0ec673c4d20b9a8d076",
 
   // Sochaux uniquement
   TEAM_SEARCH: "Sochaux",
