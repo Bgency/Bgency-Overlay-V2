@@ -311,7 +311,7 @@ async function updateStandings() {
       : [];
 
     if (!table.length) {
-      $("#standingsList").innerHTML =
+      $("standingsList").innerHTML =
         '<div class="empty">Classement indisponible</div>';
       return;
     }
@@ -332,7 +332,7 @@ async function updateStandings() {
 
     const visible = table.slice(start, start + 7);
 
-    $("#standingsList").innerHTML = visible.map(row => `
+    $("standingsList").innerHTML = visible.map(row => `
       <div class="standingRow ${
         String(row?.team?.id) === String(teamId)
           ? "currentTeam"
@@ -363,7 +363,7 @@ async function updateStandings() {
   } catch (err) {
   console.error("Erreur classement :", err);
 
-  const standingsEl = $("#standingsList");
+  const standingsEl = $("standingsList");
 
   if (standingsEl) {
     standingsEl.innerHTML =
