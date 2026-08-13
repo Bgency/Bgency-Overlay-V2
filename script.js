@@ -292,45 +292,81 @@ async function updateStandings() {
   if (!teamId || !currentLeague || !CONFIG.SHOW_STANDINGS) return;
 
   try {
-    const season = currentLeague.season || new Date().getFullYear();
+    const season =
+      currentLeague.season || new Date().getFullYear();
 
     const data = await api(
-      `/standings?league=${currentLeague.id}&season=${season}}
-      `
-      
+      `/standings?league=${currentLeague.id}&season=${season}`
     );
 
-    const groups = data.response?.[0]?.league?.standings || [];
-    const table = groups.flat();
+    // API-Football peut retourner plusieurs groupes selon la compétition
+    const standings =
+      data?.response?.[0]?.league?.standings ||
+      data?.response?.[0]?.standings ||
+      [];
+
+    // On récupère toutes les équipes dans tous les groupes
+    const table = Array.isArray(standings)
+      ? standings.flat().filter(Boolean)
+      : [];
 
     if (!table.length) {
-      $("standingsList").innerHTML =
+      $("#standingsList").innerHTML =
         '<div class="empty">Classement indisponible</div>';
       return;
     }
 
-    const teamPosition = table.findIndex(x => x.team?.id === teamId);
-    let start = Math.max(0, teamPosition - 3);
-    let visible = table.slice(start, start + 7);
+    // Recherche de Sochaux dans le classement
+    const teamPosition = table.findIndex(
+      row => String(row?.team?.id) === String(teamId)
+    );
 
-    $("standingsList").innerHTML = visible.map(row => `
-      <div class="standingRow ${row.team?.id === teamId ? "currentTeam" : ""}">
-        <span>${row.rank ?? "—"}</span>
+    // Si Sochaux est trouvé : 3 équipes avant + Sochaux + 3 après
+    let start;
+
+    if (teamPosition >= 0) {
+      start = Math.max(0, teamPosition - 3);
+    } else {
+      start = 0;
+    }
+
+    const visible = table.slice(start, start + 7);
+
+    $("#standingsList").innerHTML = visible.map(row => `
+      <div class="standingRow ${
+        String(row?.team?.id) === String(teamId)
+          ? "currentTeam"
+          : ""
+      }">
+        <span>${row?.rank ?? "-"}</span>
+
         <span class="standingTeam">
-          <img src="${escapeAttr(row.team?.logo || "")}" alt="">
-          ${escapeHtml(row.team?.name || "—")}
+          <img
+            src="${escapeAttr(row?.team?.logo || "")}"
+            alt=""
+          >
+          ${escapeHtml(row?.team?.name || "-")}
         </span>
-        <span>${row.points ?? "—"}</span>
-        <span>${row.goalsDiff > 0 ? "+" : ""}${row.goalsDiff ?? "—"}</span>
+
+        <span>${row?.points ?? "-"}</span>
+
+        <span>
+          ${
+            row?.goalsDiff > 0
+              ? "+"
+              : ""
+          }${row?.goalsDiff ?? "-"}
+        </span>
       </div>
     `).join("");
 
-    $("standingsFooter").textContent =
-      `${currentLeague.name || "CLASSEMENT"} • POSITION ${teamPosition >= 0 ? table[teamPosition].rank : "—"}`;
-  } catch (e) {
-    log("Classement : " + e.message);
+  } catch (err) {
+    console.error("Erreur classement :", err);
+
+    $("#standingsList").innerHTML =
+      '<div class="empty">Classement indisponible</div>';
   }
-}
+      }
 
 async function updateNextMatch() {
   if (!teamId || !CONFIG.SHOW_NEXT_MATCH) return;
