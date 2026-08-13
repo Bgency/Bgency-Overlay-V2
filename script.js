@@ -295,7 +295,9 @@ async function updateStandings() {
     const season = currentLeague.season || new Date().getFullYear();
 
     const data = await api(
-      `/standings?league=${currentLeague.id}&season=${season}&team=${teamId}`
+      `/standings?league=${currentLeague.id}&season=${season}}
+      `
+      
     );
 
     const groups = data.response?.[0]?.league?.standings || [];
