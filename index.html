@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BGency Match Overlay V2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="overlay" class="overlay hidden">
+
+    <!-- SCORE / MATCH -->
+    <section class="scorebar">
+      <div class="liveTag" id="liveTag">● EN DIRECT</div>
+
+      <div class="team home">
+        <img id="homeLogo" alt="">
+        <div>
+          <span id="homeName">FCSM</span>
+          <small id="homeShort">FCSM</small>
+        </div>
+      </div>
+
+      <div class="scoreBlock">
+        <div class="score">
+          <span id="homeScore">0</span>
+          <span class="dash">-</span>
+          <span id="awayScore">0</span>
+        </div>
+        <div id="matchState" class="state">AVANT-MATCH</div>
+        <div class="clock" id="clock">00:00</div>
+      </div>
+
+      <div class="team away">
+        <div>
+          <span id="awayName">ADVERSAIRE</span>
+          <small id="awayShort">ADVERSAIRE</small>
+        </div>
+        <img id="awayLogo" alt="">
+      </div>
+    </section>
+
+    <!-- MATCH INFORMATION -->
+    <section class="matchInfo">
+      <div class="infoItem">
+        <span class="infoIcon">🏆</span>
+        <div><b id="competition">—</b><small id="round">—</small></div>
+      </div>
+      <div class="infoItem">
+        <span class="infoIcon">🏟️</span>
+        <div><b id="stadium">—</b><small id="city">—</small></div>
+      </div>
+      <div class="infoItem">
+        <span class="infoIcon">📅</span>
+        <div><b id="matchDate">—</b><small id="matchTime">—</small></div>
+      </div>
+      <div class="infoItem">
+        <span class="infoIcon">👥</span>
+        <div><b id="attendance">—</b><small>SPECTATEURS</small></div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="mainGrid">
+
+      <!-- LEFT -->
+      <div class="leftCol">
+
+        <section class="panel eventsPanel">
+          <div class="panelTitle">⚽ <span>ÉVÉNEMENTS DU MATCH</span></div>
+          <div id="eventsList" class="eventsList">
+            <div class="empty">Aucun événement</div>
+          </div>
+        </section>
+
+        <section class="panel standingsPanel">
+          <div class="panelTitle">📊 <span>CLASSEMENT</span></div>
+          <div class="standingsHead">
+            <span>#</span><span>ÉQUIPE</span><span>PTS</span><span>DIFF.</span>
+          </div>
+          <div id="standingsList" class="standingsList">
+            <div class="empty">Classement indisponible</div>
+          </div>
+          <div class="panelFooter" id="standingsFooter">CLASSEMENT</div>
+        </section>
+
+        <section class="panel nextPanel">
+          <div class="panelTitle">📅 <span>PROCHAIN MATCH</span></div>
+          <div class="nextMatch">
+            <div class="nextTeam">
+              <img id="nextHomeLogo" alt="">
+              <b id="nextHomeName">—</b>
+            </div>
+            <div class="nextVs">VS</div>
+            <div class="nextTeam">
+              <img id="nextAwayLogo" alt="">
+              <b id="nextAwayName">—</b>
+            </div>
+          </div>
+          <div class="nextDate" id="nextDate">—</div>
+          <div class="nextVenue" id="nextVenue">—</div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="rightCol">
+
+        <section class="panel sourcePanel cameraPanel">
+          <div class="panelTitle">🎥 <span>CAMÉRA LIVE</span></div>
+          <div class="sourceFrame" id="cameraFrame">
+            <span>ZONE CAMÉRA</span>
+          </div>
+        </section>
+
+        <section class="panel sourcePanel lionPanel">
+          <div class="panelTitle">🦁 <span>SOCHALION</span></div>
+          <div class="sourceFrame lionFrame" id="sochalionFrame">
+            <span>ZONE SOCHALION</span>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- COMMENTS BACKGROUND / SAFE AREA -->
+    <section class="commentsPanel">
+      <div class="commentsTitle">💬 <span>COMMENTAIRES DU LIVE</span></div>
+      <div class="commentsSafe">
+        <div class="stadiumBg"></div>
+      </div>
+    </section>
+
+    <!-- EVENT OVERLAY -->
+    <div id="eventBanner" class="eventBanner">
+      <span id="eventIcon">⚽</span>
+      <span id="eventText">BUT !</span>
+    </div>
+
+  </main>
+
+  <div id="debug" class="debug">Connexion…</div>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

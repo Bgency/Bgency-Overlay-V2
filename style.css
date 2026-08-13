@@ -1,0 +1,616 @@
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:transparent;
+  overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{color:#fff}
+
+.overlay{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(96vw,1120px);
+  color:#fff;
+}
+
+.hidden{display:none}
+
+.scorebar{
+  position:relative;
+  height:112px;
+  border:2px solid #f6c100;
+  border-radius:16px;
+  background:rgba(5,15,35,.96);
+  box-shadow:0 8px 28px rgba(0,0,0,.38);
+  display:grid;
+  grid-template-columns:1fr 250px 1fr;
+  align-items:center;
+  padding:12px 18px;
+  gap:12px;
+  overflow:hidden;
+}
+
+.scorebar:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(246,193,0,.08),transparent 20%,transparent 80%,rgba(246,193,0,.08));
+}
+
+.liveTag{
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  background:#f6c100;
+  color:#071326;
+  padding:6px 28px 7px;
+  border-radius:0 0 12px 12px;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:1px;
+  z-index:2;
+}
+
+.team{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  font-weight:900;
+  font-size:25px;
+  letter-spacing:.3px;
+  z-index:1;
+}
+
+.team.home{justify-content:flex-start}
+.team.away{justify-content:flex-end;text-align:right}
+
+.team img{
+  width:68px;
+  height:68px;
+  object-fit:contain;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));
+}
+
+.team small{
+  display:block;
+  margin-top:3px;
+  color:#f6c100;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.scoreBlock{
+  min-width:0;
+  text-align:center;
+  z-index:1;
+}
+
+.score{
+  font-size:48px;
+  font-weight:900;
+  line-height:48px;
+  letter-spacing:3px;
+}
+
+.dash{
+  padding:0 8px;
+  color:#f6c100;
+}
+
+.state{
+  display:inline-block;
+  margin-top:4px;
+  padding:4px 12px;
+  border-radius:999px;
+  background:#f6c100;
+  color:#071326;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.clock{
+  margin-top:4px;
+  font-size:19px;
+  font-weight:900;
+  color:#f6c100;
+  font-variant-numeric:tabular-nums;
+}
+
+.matchInfo{
+  margin-top:8px;
+  min-height:70px;
+  border:2px solid rgba(246,193,0,.9);
+  border-radius:12px;
+  background:rgba(5,15,35,.94);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  align-items:center;
+}
+
+.infoItem{
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 14px;
+  border-right:1px solid rgba(255,255,255,.16);
+}
+
+.infoItem:last-child{border-right:0}
+
+.infoIcon{font-size:21px}
+
+.infoItem b{
+  display:block;
+  font-size:13px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.infoItem small{
+  display:block;
+  margin-top:3px;
+  color:#f6c100;
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.mainGrid{
+  margin-top:8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.leftCol,.rightCol{
+  min-width:0;
+  display:grid;
+  gap:8px;
+}
+
+.panel{
+  border:2px solid rgba(246,193,0,.9);
+  border-radius:12px;
+  background:rgba(5,15,35,.95);
+  box-shadow:0 5px 18px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+.panelTitle{
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 12px;
+  color:#f6c100;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:.7px;
+  background:rgba(246,193,0,.07);
+  border-bottom:1px solid rgba(246,193,0,.35);
+}
+
+.eventsPanel{min-height:235px}
+.standingsPanel{min-height:230px}
+.nextPanel{min-height:185px}
+
+.eventsList{padding:3px 9px}
+
+.eventRow{
+  min-height:29px;
+  display:grid;
+  grid-template-columns:42px 30px 1fr 28px;
+  align-items:center;
+  gap:5px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.eventRow:last-child{border-bottom:0}
+
+.eventMinute{
+  color:#f6c100;
+  font-size:12px;
+  font-weight:900;
+  text-align:center;
+}
+
+.eventType{
+  font-size:17px;
+  text-align:center;
+}
+
+.eventPlayer{
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.eventLogo{
+  width:23px;
+  height:23px;
+  object-fit:contain;
+}
+
+.empty{
+  padding:28px 10px;
+  color:rgba(255,255,255,.5);
+  text-align:center;
+  font-size:12px;
+}
+
+.standingsHead,
+.standingRow{
+  display:grid;
+  grid-template-columns:28px 1fr 45px 50px;
+  align-items:center;
+  gap:5px;
+}
+
+.standingsHead{
+  padding:7px 10px 5px;
+  color:rgba(255,255,255,.6);
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.standingRow{
+  min-height:27px;
+  padding:2px 10px;
+  border-top:1px solid rgba(255,255,255,.055);
+  font-size:11px;
+  font-weight:800;
+}
+
+.standingRow.currentTeam{
+  color:#071326;
+  background:#f6c100;
+}
+
+.standingTeam{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+}
+
+.standingTeam img{
+  width:20px;
+  height:20px;
+  object-fit:contain;
+}
+
+.standingTeam{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.panelFooter{
+  padding:7px 10px;
+  color:#f6c100;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.nextMatch{
+  display:grid;
+  grid-template-columns:1fr 45px 1fr;
+  align-items:center;
+  gap:7px;
+  padding:14px 18px 6px;
+}
+
+.nextTeam{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  text-align:center;
+  font-size:12px;
+}
+
+.nextTeam img{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+}
+
+.nextVs{
+  text-align:center;
+  color:#f6c100;
+  font-size:15px;
+  font-weight:900;
+}
+
+.nextDate,.nextVenue{
+  text-align:center;
+  font-size:11px;
+  font-weight:800;
+}
+
+.nextDate{color:#f6c100}
+.nextVenue{
+  margin-top:5px;
+  color:rgba(255,255,255,.65);
+  font-size:9px;
+}
+
+.sourcePanel{
+  display:flex;
+  flex-direction:column;
+}
+
+.cameraPanel{min-height:305px}
+.lionPanel{min-height:360px}
+
+.sourceFrame{
+  position:relative;
+  flex:1;
+  min-height:250px;
+  border:1px dashed rgba(246,193,0,.32);
+  background:rgba(4,12,28,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.sourceFrame>span{
+  color:rgba(255,255,255,.18);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2px;
+  pointer-events:none;
+}
+
+.lionFrame{
+  min-height:315px;
+  aspect-ratio:836 / 1100;
+  max-height:380px;
+  margin:0 auto;
+  width:68%;
+  background:transparent;
+}
+
+.commentsPanel{
+  margin-top:8px;
+  height:220px;
+  border:2px solid rgba(246,193,0,.9);
+  border-radius:12px;
+  overflow:hidden;
+  background:rgba(5,15,35,.88);
+  position:relative;
+}
+
+.commentsTitle{
+  position:relative;
+  z-index:2;
+  min-height:36px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 12px;
+  color:#f6c100;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:.7px;
+  background:rgba(5,15,35,.88);
+  border-bottom:1px solid rgba(246,193,0,.25);
+}
+
+.commentsSafe{
+  position:absolute;
+  inset:36px 0 0;
+  overflow:hidden;
+}
+
+.stadiumBg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(5,15,35,.55),rgba(5,15,35,.82)),
+    radial-gradient(circle at 50% 10%,rgba(246,193,0,.18),transparent 30%),
+    linear-gradient(135deg,#14284c,#071326 55%,#0b2a3c);
+}
+
+.stadiumBg:after{
+  content:"FCSM • ALLEZ SOCHAUX";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) rotate(-8deg);
+  color:rgba(246,193,0,.07);
+  font-size:40px;
+  font-weight:900;
+  white-space:nowrap;
+  letter-spacing:5px;
+}
+
+.eventBanner{
+  position:absolute;
+  left:50%;
+  top:118px;
+  z-index:20;
+  transform:translate(-50%,-12px) scale(.96);
+  opacity:0;
+  pointer-events:none;
+  background:rgba(5,15,35,.98);
+  border:3px solid #f6c100;
+  border-radius:14px;
+  padding:12px 25px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:22px;
+  font-weight:900;
+  box-shadow:0 8px 25px rgba(0,0,0,.4);
+  transition:opacity .25s,transform .25s;
+}
+
+.eventBanner.show{
+  opacity:1;
+  transform:translate(-50%,0) scale(1);
+}
+
+#eventIcon{font-size:28px}
+
+.debug{
+  position:fixed;
+  bottom:6px;
+  left:6px;
+  color:rgba(255,255,255,.45);
+  font:10px Arial;
+  display:none;
+}
+
+@media(max-width:800px){
+  .overlay{
+    top:8px;
+    width:98vw;
+  }
+
+  .scorebar{
+    height:78px;
+    padding:7px 8px;
+    gap:5px;
+    grid-template-columns:1fr 120px 1fr;
+    border-radius:10px;
+  }
+
+  .liveTag{
+    font-size:8px;
+    padding:4px 14px 5px;
+  }
+
+  .team{
+    font-size:13px;
+    gap:5px;
+  }
+
+  .team img{
+    width:38px;
+    height:38px;
+  }
+
+  .team small{display:none}
+
+  .score{
+    font-size:31px;
+    line-height:31px;
+  }
+
+  .state{
+    font-size:7px;
+    padding:2px 5px;
+  }
+
+  .clock{
+    font-size:13px;
+    margin-top:2px;
+  }
+
+  .matchInfo{
+    min-height:45px;
+  }
+
+  .infoItem{
+    padding:4px 5px;
+    gap:4px;
+  }
+
+  .infoIcon{font-size:13px}
+  .infoItem b{font-size:7px}
+  .infoItem small{font-size:6px}
+
+  .mainGrid{
+    grid-template-columns:1fr 1fr;
+    gap:5px;
+  }
+
+  .panelTitle{
+    min-height:27px;
+    padding:4px 6px;
+    font-size:9px;
+  }
+
+  .eventsPanel{min-height:145px}
+  .standingsPanel{min-height:150px}
+  .nextPanel{min-height:120px}
+
+  .eventRow{
+    min-height:20px;
+    grid-template-columns:25px 20px 1fr 18px;
+  }
+
+  .eventMinute,.eventPlayer{font-size:7px}
+  .eventType{font-size:10px}
+  .eventLogo{width:15px;height:15px}
+
+  .standingsHead,.standingRow{
+    grid-template-columns:17px 1fr 25px 25px;
+    font-size:7px;
+  }
+
+  .standingRow{min-height:19px;padding:1px 5px}
+  .standingTeam img{width:13px;height:13px}
+  .standingsHead{padding:4px 5px}
+
+  .panelFooter{font-size:6px;padding:4px 5px}
+
+  .nextMatch{
+    padding:6px 6px 2px;
+    grid-template-columns:1fr 25px 1fr;
+  }
+
+  .nextTeam{font-size:7px}
+  .nextTeam img{width:34px;height:34px}
+  .nextVs{font-size:9px}
+  .nextDate{font-size:7px}
+  .nextVenue{font-size:6px}
+
+  .cameraPanel{min-height:195px}
+  .lionPanel{min-height:230px}
+
+  .sourceFrame{min-height:160px}
+  .lionFrame{
+    min-height:205px;
+    width:66%;
+  }
+
+  .commentsPanel{
+    height:145px;
+    margin-top:5px;
+  }
+
+  .commentsTitle{
+    min-height:25px;
+    padding:4px 6px;
+    font-size:9px;
+  }
+
+  .commentsSafe{inset:25px 0 0}
+
+  .eventBanner{
+    top:84px;
+    font-size:14px;
+    padding:8px 13px;
+  }
+
+  #eventIcon{font-size:18px}
+}
