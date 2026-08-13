@@ -24,5 +24,5 @@ const CONFIG = {
   SHOW_NEXT_MATCH: true,
 
   // Affiche une petite info de diagnostic uniquement si tu l'actives.
-  DEBUG: false
+  DEBUG: true
 };
