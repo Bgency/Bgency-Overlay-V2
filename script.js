@@ -361,10 +361,16 @@ async function updateStandings() {
     `).join("");
 
   } catch (err) {
-    console.error("Erreur classement :", err);
+  console.error("Erreur classement :", err);
 
-    $("#standingsList").innerHTML =
+  const standingsEl = $("#standingsList");
+
+  if (standingsEl) {
+    standingsEl.innerHTML =
       '<div class="empty">Classement indisponible</div>';
+  }
+
+  log("Erreur classement : " + (err?.message || err));
   }
 }     
 
