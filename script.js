@@ -366,7 +366,7 @@ async function updateStandings() {
     $("#standingsList").innerHTML =
       '<div class="empty">Classement indisponible</div>';
   }
-      
+}    
 
 async function updateNextMatch() {
   if (!teamId || !CONFIG.SHOW_NEXT_MATCH) return;
