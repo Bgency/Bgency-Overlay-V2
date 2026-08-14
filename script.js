@@ -324,8 +324,11 @@ log(
 
     // On récupère toutes les équipes dans tous les groupes
     const table = Array.isArray(standings)
-  ? standings.flat().filter(Boolean)
+  ? standings.flat(Infinity).filter(row => row && row.team)
   : [];
+
+log("TABLE FINAL = " + table.length);
+log("PREMIERE EQUIPE = " + JSON.stringify(table[0] || null));
 
     if (!table.length) {
       $("standingsList").innerHTML =
