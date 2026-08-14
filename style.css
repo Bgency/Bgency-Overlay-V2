@@ -17,7 +17,7 @@ body{color:#fff}
   transform:translateX(-50%);
   width:min(96vw,1120px);
   color:#fff;
-  background:#001a3d;
+  background:rgb(5,15,35);
 }
 
 .hidden{display:none}
