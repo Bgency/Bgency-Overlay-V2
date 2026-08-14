@@ -341,23 +341,13 @@ const teamPosition = table.findIndex(
   row => String(row.team?.id) === String(teamId)
 );
 
-log("ETAPE 1 - TABLE = " + table.length);
-log("ETAPE 2 - TEAM ID = " + teamId);
-log("ETAPE 3 - POSITION SOCHAUX = " + teamPosition);
-
-let start;
-
-if (teamPosition >= 0) {
-  start = Math.max(0, teamPosition - 3);
-} else {
-  start = 0;
-}
-
-log("ETAPE 4 - START = " + start);
-
-const visible = table.slice(start, start + 7);
-
-log("ETAPE 5 - VISIBLE = " + visible.length);
+log(
+  "TABLE=" + table.length +
+  " | TEAM ID=" + teamId +
+  " | POSITION=" + teamPosition +
+  " | START=" + start +
+  " | VISIBLE=" + visible.length
+);
     const standingsEl = $("#standingsList");
     if (!standingsEl) return;
     standingsEl.innerHTML = visible.map(row => `
