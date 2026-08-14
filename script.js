@@ -310,14 +310,8 @@ log(`STANDINGS | league=${currentLeague?.id} | season=$
 
     // On récupère toutes les équipes dans tous les groupes
     const table = Array.isArray(standings)
-    ? standings.flat(Infinity).filter(row => row && row.team)
-    : [];
-
-console.log("STANDINGS RAW :", standings);
-console.log("TABLE :", table);
-console.log("TABLE LENGTH :", table.length);
-      ? standings.flat().filter(Boolean)
-      : [];
+  ? standings.flat().filter(Boolean)
+  : [];
 
     if (!table.length) {
       $("standingsList").innerHTML =
