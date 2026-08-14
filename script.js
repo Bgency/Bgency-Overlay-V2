@@ -337,21 +337,27 @@ log("PREMIERE EQUIPE = " + JSON.stringify(table[0] || null));
     }
 
     // Recherche de Sochaux dans le classement
-    const teamPosition = table.findIndex(
-      row => String(row?.team?.id) === String(teamId)
-    );
+const teamPosition = table.findIndex(
+  row => String(row.team?.id) === String(teamId)
+);
 
-    // Si Sochaux est trouvé : 3 équipes avant + Sochaux + 3 après
-    let start;
+log("ETAPE 1 - TABLE = " + table.length);
+log("ETAPE 2 - TEAM ID = " + teamId);
+log("ETAPE 3 - POSITION SOCHAUX = " + teamPosition);
 
-    if (teamPosition >= 0) {
-      start = Math.max(0, teamPosition - 3);
-    } else {
-      start = 0;
-    }
+let start;
 
-    const visible = table.slice(start, start + 7);
+if (teamPosition >= 0) {
+  start = Math.max(0, teamPosition - 3);
+} else {
+  start = 0;
+}
 
+log("ETAPE 4 - START = " + start);
+
+const visible = table.slice(start, start + 7);
+
+log("ETAPE 5 - VISIBLE = " + visible.length);
     const standingsEl = $("#standingsList");
     if (!standingsEl) return;
     standingsEl.innerHTML = visible.map(row => `
