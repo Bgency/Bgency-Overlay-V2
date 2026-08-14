@@ -306,7 +306,8 @@ log(
   " | response=" +
   (data?.response?.length || 0)
 );
-    
+    log("HAS LEAGUE = " + !!data?.response?.[0]?.league);
+log("HAS STANDINGS = " + !!data?.response?.[0]?.league?.standings);
     // API-Football peut retourner plusieurs groupes selon la compétition
     const standings =
       data?.response?.[0]?.league?.standings ||
