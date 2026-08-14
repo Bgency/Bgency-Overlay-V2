@@ -357,7 +357,10 @@ log(
   " | VISIBLE=" + visible.length
 );
     const standingsEl = $("#standingsList");
-    if (!standingsEl) return;
+
+log("STANDINGS ELEMENT = " + !!standingsEl);
+
+if (!standingsEl) return;
     standingsEl.innerHTML = visible.map(row => `
       <div class="standingRow ${
         String(row?.team?.id) === String(teamId)
