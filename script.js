@@ -340,7 +340,15 @@ log("PREMIERE EQUIPE = " + JSON.stringify(table[0] || null));
 const teamPosition = table.findIndex(
   row => String(row.team?.id) === String(teamId)
 );
+let start;
 
+if (teamPosition >= 0) {
+  start = Math.max(0, teamPosition - 3);
+} else {
+  start = 0;
+}
+
+const visible = table.slice(start, start + 7);
 log(
   "TABLE=" + table.length +
   " | TEAM ID=" + teamId +
