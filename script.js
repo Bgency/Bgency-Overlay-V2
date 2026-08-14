@@ -298,9 +298,14 @@ async function updateStandings() {
     const data = await api(
       `/standings?league=${currentLeague.id}&season=${season}`
     );
-log(`STANDINGS | league=${currentLeague?.id} | season=$
-  {season} | response=$
-    {data?.response?.length || 0}`);
+log(
+  "STANDINGS | league=" +
+  (currentLeague?.id || "-") +
+  " | season=" +
+  season +
+  " | response=" +
+  (data?.response?.length || 0)
+);
     
     // API-Football peut retourner plusieurs groupes selon la compétition
     const standings =
