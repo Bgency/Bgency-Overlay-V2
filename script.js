@@ -356,9 +356,7 @@ log(
   " | START=" + start +
   " | VISIBLE=" + visible.length
 );
-    const standingsEl = $("#standingsList");
-
-log("STANDINGS ELEMENT = " + !!standingsEl);
+    const standingsEl = document.getElementById("standingsList");
 
 if (!standingsEl) return;
     standingsEl.innerHTML = visible.map(row => `
