@@ -12,7 +12,7 @@ const CONFIG = {
 
   // 120 s = ~60 requêtes pour 2 h de match.
   // À conserver pour l'instant afin d'éviter de consommer inutilement le quota.
-  REFRESH_MS: 6000000,
+  REFRESH_MS: 15000,
 
   // Événements du match affichés dans la colonne gauche.
   SHOW_EVENTS: true,
