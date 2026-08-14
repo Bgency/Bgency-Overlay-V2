@@ -301,6 +301,17 @@ async function updateStandings() {
 log(`STANDINGS | league=${currentLeague?.id} | season=$
   {season} | response=$
     {data?.response?.length || 0}`);
+    const standingsDebug = $("standingsList");
+
+if (standingsDebug) {
+  standingsDebug.innerHTML =
+    `<div class="empty">
+      DEBUG : Ligue ${currentLeague?.id || "-"}<br>
+      Saison ${season}<br>
+      Réponse API : ${data?.response?.length || 0}
+    </div>`;
+}
+    return;
     // API-Football peut retourner plusieurs groupes selon la compétition
     const standings =
       data?.response?.[0]?.league?.standings ||
