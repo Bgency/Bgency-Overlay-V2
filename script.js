@@ -306,8 +306,16 @@ log(
   " | response=" +
   (data?.response?.length || 0)
 );
-    log("HAS LEAGUE = " + !!data?.response?.[0]?.league);
-log("HAS STANDINGS = " + !!data?.response?.[0]?.league?.standings);
+    log(
+  "STANDINGS TYPE=" +
+  typeof data?.response?.[0]?.league?.standings +
+  " | ARRAY=" +
+  Array.isArray(data?.response?.[0]?.league?.standings) +
+  " | LENGTH=" +
+  (data?.response?.[0]?.league?.standings?.length || 0) +
+  " | FIRST=" +
+  JSON.stringify(data?.response?.[0]?.league?.standings?.[0]?.[0] || data?.response?.[0]?.league?.standings?.[0] || null)
+);
     // API-Football peut retourner plusieurs groupes selon la compétition
     const standings =
       data?.response?.[0]?.league?.standings ||
