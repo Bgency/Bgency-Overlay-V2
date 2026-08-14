@@ -308,7 +308,9 @@ if (standingsDebug) {
     `<div class="empty">
       DEBUG : Ligue ${currentLeague?.id || "-"}<br>
       Saison ${season}<br>
-      Réponse API : ${data?.response?.length || 0}
+      Réponse API : ${data?.response?.length || 0}<br>
+Groupes classement : ${data?.response?.[0]?.league?.standings?.length || 0}<br>
+Équipes : ${data?.response?.[0]?.league?.standings?.flat()?.length || 0}
     </div>`;
 }
     return;
