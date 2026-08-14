@@ -313,7 +313,6 @@ Groupes classement : ${data?.response?.[0]?.league?.standings?.length || 0}<br>
 Équipes : ${data?.response?.[0]?.league?.standings?.flat()?.length || 0}
     </div>`;
 }
-    return;
     // API-Football peut retourner plusieurs groupes selon la compétition
     const standings =
       data?.response?.[0]?.league?.standings ||
