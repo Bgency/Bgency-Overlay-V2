@@ -179,26 +179,47 @@ function eventIcon(event) {
 
 function eventText(event) {
   const minute = event.time?.elapsed ?? "";
-  const extra = event.time?.extra ? "+" + event.time.extra : "";
+  const extra = event.time?.extra ? `+${event.time.extra}` : "";
   const minuteText = minute ? `${minute}${extra}'` : "";
 
   let text = "";
 
   if (event.type === "Goal") {
     const player = event.player?.name || "";
-    text = player || "But";
+    const assist = event.assist?.name || "";
+
+    text = player ? `But - ${player}` : "But";
+
+    if (assist) {
+      text += ` (passe : ${assist})`;
+    }
+
   } else if (event.type === "Card") {
-    text = event.detail || "Carton";
-  } else if (event.type === "Subst") {
     const player = event.player?.name || "";
-    text = player ? `Remplacement — ${player}` : "Remplacement";
+    const detail = event.detail || "Carton";
+
+    text = player ? `${detail} - ${player}` : detail;
+
+  } else if (event.type === "Subst") {
+    const playerOut = event.player?.name || "";
+    const playerIn = event.assist?.name || "";
+
+    if (playerOut && playerIn) {
+      text = `Remplacement : ${playerOut} → ${playerIn}`;
+    } else if (playerOut) {
+      text = `Remplacement : ${playerOut}`;
+    } else if (playerIn) {
+      text = `Remplacement : ${playerIn}`;
+    } else {
+      text = "Remplacement";
+    }
+
   } else {
     text = event.detail || event.type || "Événement";
   }
 
   return { minuteText, text };
 }
-
 function renderEvents(events) {
   const container = $("eventsList");
 
