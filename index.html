@@ -73,16 +73,36 @@
         </section>
 
         <section class="panel standingsPanel">
-          <div class="panelTitle">📊 <span>CLASSEMENT</span></div>
-          <div class="standingsHead">
-            <span>#</span><span>ÉQUIPE</span><span>PTS</span><span>DIFF.</span>
-          </div>
-          <div id="standingsList" class="standingsList">
-            <div class="empty">Classement indisponible</div>
-          </div>
-          <div class="panelFooter" id="standingsFooter">CLASSEMENT</div>
-        </section>
 
+  <div class="panelTitle">
+    <button
+      onclick="document.getElementById('standingsList').style.display='block';document.getElementById('compositionsList').style.display='none';"
+      style="background:none;border:0;color:#ffd000;font-weight:bold;font-size:inherit;padding:0;">
+      📊 CLASSEMENT
+    </button>
+
+    <button
+      onclick="document.getElementById('standingsList').style.display='none';document.getElementById('compositionsList').style.display='block';"
+      style="background:none;border:0;color:#888;font-weight:bold;font-size:inherit;padding:0;margin-left:12px;">
+      ⚽ COMPOSITIONS
+    </button>
+  </div>
+
+  <div class="standingsHead">
+    <span>#</span><span>ÉQUIPE</span><span>PTS</span><span>DIFF.</span>
+  </div>
+
+  <div id="standingsList" class="standingsList">
+    <div class="empty">Classement indisponible</div>
+  </div>
+
+  <div id="compositionsList" class="standingsList" style="display:none;">
+    <div class="empty">Compositions à venir</div>
+  </div>
+
+  <div class="panelFooter" id="standingsFooter">CLASSEMENT</div>
+
+        </section>
         <section class="panel nextPanel">
           <div class="panelTitle">📅 <span>PROCHAIN MATCH</span></div>
           <div class="nextMatch">
