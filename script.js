@@ -364,22 +364,21 @@ async function updateLineups() {
     };
 
     for (const lineup of lineups) {
-      const teamId = String(lineup.team?.id || "");
-
-      if (String(teamId) === String(teamIdGlobal)) {
-        $("#compositionSochaux").innerHTML = renderTeam(lineup);
-      }
-    }
-
-    // On identifie automatiquement l'autre équipe
     for (const lineup of lineups) {
-      const teamId = String(lineup.team?.id || "");
+  const lineupTeamId = String(lineup.team?.id || "");
 
-      if (String(teamId) !== String(teamIdGlobal)) {
-        $("#compositionAdversaire").innerHTML = renderTeam(lineup);
-      }
-    }
+  if (lineupTeamId === String(teamId)) {
+    $("#compositionSochaux").innerHTML = renderTeam(lineup);
+  }
+}
 
+for (const lineup of lineups) {
+  const lineupTeamId = String(lineup.team?.id || "");
+
+  if (lineupTeamId !== String(teamId)) {
+    $("#compositionAdversaire").innerHTML = renderTeam(lineup);
+  }
+}
   } catch (e) {
     log("Compositions : " + e.message);
   }
