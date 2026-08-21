@@ -364,7 +364,6 @@ async function updateLineups() {
     };
 
     for (const lineup of lineups) {
-    for (const lineup of lineups) {
   const lineupTeamId = String(lineup.team?.id || "");
 
   if (lineupTeamId === String(teamId)) {
