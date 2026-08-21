@@ -308,7 +308,82 @@ async function updateEvents() {
     log("Événements : " + e.message);
   }
 }
+async function updateLineups() {
+  if (!fixtureId) return;
 
+  try {
+    const data = await api(`/fixtures/lineups?fixture=${fixtureId}`);
+    const lineups = data.response || [];
+
+    if (!lineups.length) {
+      $("#compositionSochaux").innerHTML =
+        '<div class="empty">Composition Sochaux à venir</div>';
+      $("#compositionAdversaire").innerHTML =
+        '<div class="empty">Composition adversaire à venir</div>';
+      return;
+    }
+
+    const renderTeam = (lineup) => {
+      const formation = lineup.formation
+        ? `<div style="text-align:center;font-weight:bold;margin-bottom:8px;">
+             Formation : ${escapeHtml(lineup.formation)}
+           </div>`
+        : "";
+
+      const titulaires = (lineup.startXI || []).map((p, i) => {
+        const player = p.player || {};
+        return `
+          <div style="padding:3px 0;">
+            ${i + 1}. ${escapeHtml(player.name || "Joueur")}
+          </div>`;
+      }).join("");
+
+      const remplacants = (lineup.substitutes || []).map((p) => {
+        const player = p.player || {};
+        return `
+          <div style="padding:2px 0;color:#aaa;">
+            ${escapeHtml(player.name || "Joueur")}
+          </div>`;
+      }).join("");
+
+      return `
+        ${formation}
+
+        <div style="font-weight:bold;margin-bottom:5px;">
+          TITULAIRES
+        </div>
+
+        ${titulaires || '<div class="empty">Non disponible</div>'}
+
+        <div style="font-weight:bold;margin:10px 0 5px;">
+          REMPLAÇANTS
+        </div>
+
+        ${remplacants || '<div class="empty">Non disponible</div>'}
+      `;
+    };
+
+    for (const lineup of lineups) {
+      const teamId = String(lineup.team?.id || "");
+
+      if (String(teamId) === String(teamIdGlobal)) {
+        $("#compositionSochaux").innerHTML = renderTeam(lineup);
+      }
+    }
+
+    // On identifie automatiquement l'autre équipe
+    for (const lineup of lineups) {
+      const teamId = String(lineup.team?.id || "");
+
+      if (String(teamId) !== String(teamIdGlobal)) {
+        $("#compositionAdversaire").innerHTML = renderTeam(lineup);
+      }
+    }
+
+  } catch (e) {
+    log("Compositions : " + e.message);
+  }
+}
 async function updateStandings() {
   if (!teamId || !currentLeague || !CONFIG.SHOW_STANDINGS) return;
 
