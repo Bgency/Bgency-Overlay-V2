@@ -625,7 +625,8 @@ async function boot() {
     }
 
     await findTeam();
-    await findMatch();
+await findMatch();
+await updateLineups();
 
     setInterval(async () => {
       await updateFixture();
