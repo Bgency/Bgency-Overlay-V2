@@ -75,17 +75,38 @@
         <section class="panel standingsPanel">
 
   <div class="panelTitle">
-    <button
-      onclick="document.getElementById('standingsList').style.display='block';document.getElementById('compositionsList').style.display='none';"
-      style="background:none;border:0;color:#ffd000;font-weight:bold;font-size:inherit;padding:0;">
-      📊 CLASSEMENT
-    </button>
+  <button
+    onclick="
+      document.getElementById('standingsList').style.display='block';
+      document.getElementById('compositionsList').style.display='none';
+      document.getElementById('compositionSochaux').style.display='none';
+      document.getElementById('compositionAdversaire').style.display='none';
+    "
+    style="background:none;border:0;color:#ffb000;font-weight:bold;font-size:inherit;padding:0;">
+    📊 CLASSEMENT
+  </button>
 
-    <button
-      onclick="document.getElementById('standingsList').style.display='none';document.getElementById('compositionsList').style.display='block';"
-      style="background:none;border:0;color:#888;font-weight:bold;font-size:inherit;padding:0;margin-left:12px;">
-      ⚽ COMPOSITIONS
-    </button>
+  <button
+    onclick="
+      document.getElementById('standingsList').style.display='none';
+      document.getElementById('compositionsList').style.display='none';
+      document.getElementById('compositionSochaux').style.display='block';
+      document.getElementById('compositionAdversaire').style.display='none';
+    "
+    style="background:none;border:0;color:#ffb000;font-weight:bold;font-size:inherit;padding:0;margin-left:10px;">
+    🟡 COMPO SOCHAUX
+  </button>
+
+  <button
+    onclick="
+      document.getElementById('standingsList').style.display='none';
+      document.getElementById('compositionsList').style.display='none';
+      document.getElementById('compositionSochaux').style.display='none';
+      document.getElementById('compositionAdversaire').style.display='block';
+    "
+    style="background:none;border:0;color:#ffb000;font-weight:bold;font-size:inherit;padding:0;margin-left:10px;">
+    🔴 COMPO ADVERSAIRE
+  </button>
   </div>
 
   <div class="standingsHead">
