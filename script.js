@@ -633,6 +633,9 @@ await updateLineups();
       // Ces données sont moins sensibles au temps :
       // on ne les recharge qu'une fois sur 5.
     }, CONFIG.REFRESH_MS);
+    setInterval(async () => {
+  await updateStandings();
+}, 180000);
 
   } catch (e) {
     $("overlay").classList.remove("hidden");
